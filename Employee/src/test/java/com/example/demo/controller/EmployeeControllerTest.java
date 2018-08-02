@@ -48,7 +48,8 @@ import com.example.demo.model.Response;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = EmployeeApplication.class)
+@ContextConfiguration(classes = EmployeeApplication.class, 
+                locations = "classpath*:/spring/applicationContext*.xml")
 @SpringBootTest
 public class EmployeeControllerTest {
 	private MockMvc mockMvc;
