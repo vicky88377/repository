@@ -1,21 +1,28 @@
 package com.example.demo.Service;
 
-import static org.junit.Assert.*;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.annotation.Rollback;
 
+import com.example.demo.Service.*;
+import com.example.demo.DAO.*;
 import com.example.demo.model.Employee;
+
+import junit.framework.Assert;
 
 public class EmployeeServiceImplimentTest {
 
-	
+	@Mock
+	private EmployeeDAO employeeDAO;
+	@Autowired
+	EmployeeServiceImpliment empService;
 	@Test
 	public void testFindAll() {
 		List<Employee> employeelist = new ArrayList<Employee>();
@@ -41,21 +48,7 @@ public class EmployeeServiceImplimentTest {
 		employee2.setAnswer("answer");
 	}
 
-	@Test
-	public void testFindOne() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testCreate() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testDelete() {
-		fail("Not yet implemented");
-	}
-
+	
 	@Test
 	public void checkLogin()
 	{
@@ -67,6 +60,29 @@ public class EmployeeServiceImplimentTest {
 		//assertEquals("1234", employee.getPassword());
 		
 	}
+	
+/*	@Test
+	public void testFindOne() {
+		Optional<Employee> e = null;
+		Employee employee1 = new Employee();
+		employee1.setId(4);
+		employee1.setUsername("gautam");
+		employee1.setPassword("1234");
+		employee1.setFullname("gambhir");
+		employee1.setEmailid( "em@gm");
+		employee1.setDateOfBirth( "16-04-1994");
+		employee1.setGender("male");
+		employee1.setSecurityQuestion("male");
+		employee1.setAnswer("male");	
+		e = Optional.of(employee1);
+		when(employeeDAO.findById(23)).thenReturn(e);
+		Employee employee = EmployeeServiceImpliment.findOne(23);
+		assertEquals(23, employee.getId());
+		assertEquals("vikas", employee.getUsername());
+		assertEquals("abcd", employee.getPassword());
+		
+	}*/
+	
 
 
 }

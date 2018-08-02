@@ -14,7 +14,7 @@ public interface EmployeeServices {
 	Employee create(Employee employee);
 
 	//Employee update(Employee employee, int id);
-	boolean checkLogin(Employee employee);
+	Employee checkLogin(Employee employee);
 
 	void delete(int id);
 

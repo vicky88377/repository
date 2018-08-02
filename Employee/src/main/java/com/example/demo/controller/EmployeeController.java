@@ -69,7 +69,7 @@ public class EmployeeController {
 			employees.add(employee);
 			return new Response("Success ", "[]", "200 ", employees);
 		} catch (Exception e) {
-			return new Response("fail", "Input data mismatch", "400", employees);
+			return new Response("fail", "Input data mismatch", "400", null);
 		}
 
 	}
@@ -89,7 +89,7 @@ public class EmployeeController {
 	    	return new Response("Success ", "Employee data inserted successfully", "200", employees);
 
 		} catch (Exception e) {
-			return new Response("failure", "Input data mismatch", "400", employees);
+			return new Response("fail", "Input data mismatch", "400", null);
 		}
 
 	}
@@ -108,12 +108,21 @@ public class EmployeeController {
 
 	}
 	@PostMapping(value = "/checkLogin", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Boolean> checkLogin(@RequestBody Employee employee) {
-		boolean flag = employeeServices.checkLogin(employee);
-		if (!flag) {
-			return new ResponseEntity<Boolean>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-		return new ResponseEntity<Boolean>(HttpStatus.OK);
+	public Response checkLogin(@RequestBody Employee employee) {
+Employee emp = null;
+		
+		try
+		{
+			 emp = employeeServices.checkLogin(employee);
 
-	}
-}
+			
+			 
+				 return new Response("Success", "Employee authentication successful","200", null);
+			 
+			 
+		}
+		catch(Exception e)
+		{
+			return new Response("Fail", "Exception while fetching recore from db","400",null);
+		}
+}}
