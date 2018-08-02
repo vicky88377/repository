@@ -1,0 +1,6 @@
+projectKey=EmployeeProj
+serverUrl=http://localhost:5000
+serverVersion=7.1.0.11001
+dashboardUrl=http://localhost:5000/dashboard/index/EmployeeProj
+ceTaskId=AWTWm4sZothcz7brVS7h
+ceTaskUrl=http://localhost:5000/api/ce/task?id=AWTWm4sZothcz7brVS7h
