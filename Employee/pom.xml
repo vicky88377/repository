@@ -87,7 +87,7 @@
             <version>0.2.3</version>
             <configuration>
                 <imageName>testimage</imageName>
-                <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
+                <dockerDirectory>${project.basedir}</dockerDirectory>
                 <resources>
                     <resource>
                         <targetPath>/</targetPath>
