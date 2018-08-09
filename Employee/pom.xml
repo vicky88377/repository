@@ -86,7 +86,7 @@
             <artifactId>docker-maven-plugin</artifactId>
             <version>0.2.3</version>
             <configuration>
-                <imageName>demoimage</imageName>
+                <imageName>testimage</imageName>
                 <dockerDirectory>${project.basedir}/src/main/docker</dockerDirectory>
                 <resources>
                     <resource>
