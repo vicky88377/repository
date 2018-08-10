@@ -1,43 +1,69 @@
 pipeline
-       {
-             agent any
-                    stages
-                    {
-                                 stage('compile-stage')
-                                 {
-                                   steps      
-                                   {    
-                                       withMaven(maven:'Maven_3_0_2')
-                                       {
-                                              sh 'mvn -f Employee/pom.xml clean compile'
-                                       }
-                                    }   
-                                 }      
-                                 stage('Testing-stage')
-                                 {
-                                   steps
-                                   {
-                                        withMaven(maven:'Maven_3_0_2')
-                                       {
-                                              sh 'mvn -f Employee/pom.xml test'
-                                       }
-                                    }   
-                                 } 
-                                  stage("build & SonarQube analysis") 
-                                
-                          }
-                          
-                                 stage('Build-stage')
-                                 {
-                                    steps
-                                    {
-                                       withMaven(maven:'Maven_3_0_2')
-                                       {
-                                              sh 'mvn -f Employee/pom.xml package docker:build'
-                                       }
-                                    } 
-                                 }  
-                             
-                    } 
-       }            
-
+	{
+		agent any
+			stages
+			{
+					stage('compile-stage')
+					{
+					  steps	
+					  {	
+						 withMaven(maven:'Maven_3_3_9')
+						 {
+							sh 'mvn -f Employee/pom.xml clean compile'
+						 }
+					   }	 
+					}	
+					stage('Testing-stage')
+					{
+					  steps
+					  {
+						withMaven(maven:'Maven_3_3_9')
+						{
+							sh 'mvn -f Employee/pom.xml test'
+						}
+					   }	
+					} 
+					 stage("SonarQube analysis") 
+					 {
+            			steps 
+            			{
+              				withSonarQubeEnv('mysonar') 
+              			 
+              				{
+                			
+                				sh 'mvn -f Employee/pom.xml org.sonarsource.scanner.maven:sonar-maven-plugin:3.2:sonar'
+             				 }
+          		  		}
+          			}
+ 				 
+					stage('Build-stage')
+					{
+					   steps
+					   {
+						 withMaven(maven:'Maven_3_3_9')
+						 {
+							sh 'mvn -f employee_management/pom.xml package docker:build'
+						 }
+					   } 
+					}  
+					 stage('Docker Image') 
+					 {
+					 	steps
+					 	{
+            				dir ('Employee/target/docker') 
+            				{
+               					 sh 'docker build -t testimage .'
+            				}
+        				}
+        			 }
+        			 stage ('Run Docker') 
+        			 {
+            			steps
+            			{
+            				
+            				sh 'docker run -p 9000:9000 -d testimage'
+            				
+            			}	
+        			} 
+			} 
+	}
