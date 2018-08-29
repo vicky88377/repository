@@ -1,4 +1,4 @@
-package com.example.demo.controller;
+ package com.example.demo.controller;
 
 import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -27,6 +27,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.context.WebApplicationContext;
 
 import com.example.demo.EmployeeApplication;
@@ -46,6 +47,9 @@ public class EmployeeControllerTest {
 	@InjectMocks
 	private EmployeeController empController;
 	
+	 @Mock
+     private RestTemplate restTemplate;
+	 
 	@Autowired
 	private WebApplicationContext wac;
 
